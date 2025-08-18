@@ -27,9 +27,6 @@ class Book(BaseModel):
     author: str
     page: int = Field(..., gt=100)
 
-# TODO: add a validation for pages to be at greater than 100
-
 @app.post("/books/")
 def create_book(book: Book):
     return {"message": f"Book {book.title} has been created)"}
-
