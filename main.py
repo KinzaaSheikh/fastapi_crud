@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Optional
+import asyncio
 
 app = FastAPI()
 
@@ -30,3 +31,8 @@ class Book(BaseModel):
 @app.post("/books/")
 def create_book(book: Book):
     return {"message": f"Book {book.title} has been created)"}
+
+@app.get("/wait/{seconds}")
+async def wait_for(seconds: int):
+    await asyncio.sleep(seconds)
+    return {"message": f"Slept for {seconds} seconds"}

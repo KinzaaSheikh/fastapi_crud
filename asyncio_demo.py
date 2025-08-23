@@ -1,13 +1,15 @@
 import asyncio
 
 async def greet(name: str):
-    print(f"👋 Hello {name}")
-    await asyncio.sleep(1)   # pretend slow operation
-    print(f"👋 Goodbye {name}")
+    print(f"Hello {name}")
+    await asyncio.sleep(1)
+    print("Goodbye {name}")
+
 
 async def main():
-    # TODO: Call greet("Kinza") and greet("Sheikh") sequentially
-    await greet("Kinza")
-    await greet("Sheikh")
+    await asyncio.gather(
+        greet("Kinza"),
+        greet("Sheikh")
+    )
 
 asyncio.run(main())
