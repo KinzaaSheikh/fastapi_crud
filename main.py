@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
-from typing import List
+from typing import Optional, List
 
 app = FastAPI()
 
@@ -8,6 +8,7 @@ class Book(BaseModel):
     title: str
     author: str
     page: int = Field(..., gt=100)
+    review: Optional[str] = None
 
 books: List[Book] = []
 
@@ -39,4 +40,3 @@ def update_book(book_id: int, updated_book: Book):
 def delete_book(book_id: int):
     books.pop(book_id)
     return {"message": f"Book {book_id} has been deleted"}
-
